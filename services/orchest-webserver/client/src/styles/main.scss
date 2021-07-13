@@ -67,6 +67,10 @@ p {
   position: relative;
 }
 
+.mdc-tooltip {
+  white-space: initial;
+}
+
 .mdc-drawer .mdc-list-item {
   font-weight: 400;
 }
@@ -102,25 +106,19 @@ h2 {
   height: 100%;
 }
 
-.create-job-modal {
-  .mdc-linear-progress {
-    margin: var(--space-5) 0;
-  }
-}
-
-header {
+.header-bar {
   height: 80px;
   padding: calc(var(--space-5) / 2);
   border-bottom: 1px solid $borderColor;
   position: relative;
 
-  .header-left,
-  .header-actions {
+  .header-bar-left,
+  .header-bar-actions {
     display: flex;
     align-items: center;
   }
 
-  .header-actions {
+  .header-bar-actions {
     button {
       margin-left: calc(var(--space-5) / 2);
       &:first-child {
@@ -129,7 +127,7 @@ header {
     }
   }
 
-  .header-left {
+  .header-bar-left {
     button.mdc-icon-button {
       font-size: 32px;
       padding: 8px;
@@ -217,12 +215,19 @@ header {
 
 .mdc-data-table {
   &.row-clickable {
-    tbody tr {
+    .mdc-data-table__row {
       &:hover {
         box-shadow: 0px 2px 2px 0px rgb(0 0 0 / 12%);
       }
       cursor: pointer;
     }
+  }
+}
+
+.material-icons.inline-icon {
+  position: absolute;
+  &.push-left {
+    margin-left: calc(var(--space-5) / 2);
   }
 }
 
@@ -260,6 +265,83 @@ a.button {
         }
         &:nth-child(2n + 1) {
           padding-right: 2.5%;
+        }
+      }
+    }
+  }
+
+  &.logs-view {
+    .top-buttons {
+      button {
+        background-color: #fff;
+      }
+    }
+    .logs {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+
+      .log-title {
+        font-weight: 500;
+      }
+
+      .mdc-list-divider {
+        margin: var(--space-5) 0;
+      }
+
+      .log-section {
+        line-height: 24px;
+        padding: 0 8px;
+        padding-bottom: calc(var(--space-5) / 2);
+        i.material-icons {
+          float: left;
+          margin-right: 10px;
+        }
+      }
+
+      .log-selector {
+        width: 20%;
+        min-width: 250px;
+        max-width: 400px;
+        padding: var(--space-5) calc(var(--space-5) / 2);
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid $borderColor;
+
+        i.note {
+          font-size: 14px;
+          padding: 8px;
+        }
+
+        .mdc-drawer {
+          width: auto;
+          border: 0;
+          padding: 0;
+          height: auto;
+
+          .mdc-list-item__graphic {
+            margin-right: 12px;
+          }
+
+          .mdc-list-item {
+            height: 56px;
+          }
+        }
+      }
+
+      .log-selector-divider {
+        border-bottom: 1px solid $borderColor;
+        width: 100%;
+        height: 0;
+      }
+
+      .logs-xterm-holder {
+        flex: 1;
+        div {
+          height: 100%;
+          > .xterm {
+            height: 100%;
+          }
         }
       }
     }
@@ -334,6 +416,27 @@ a.button {
   flex-direction: column;
   height: 100%;
 
+  .configuration {
+    .columns {
+      .column:nth-child(1) {
+        width: 30%;
+      }
+      margin-bottom: var(--space-5);
+    }
+  }
+  .service-form {
+    h3 {
+      .inline-icon {
+        font-size: 22px;
+      }
+    }
+
+    white-space: initial;
+    .columns {
+      margin-bottom: var(--space-5);
+    }
+  }
+
   .tab-view {
     flex: 1;
     overflow-y: auto;
@@ -403,6 +506,10 @@ p > i.material-icons.float-left {
   }
 }
 
+.mdc-dialog {
+  z-index: 99;
+}
+
 /* override title styling on overflow */
 .mdc-dialog--scrollable .mdc-dialog__title {
   padding-bottom: 9px;
@@ -414,6 +521,53 @@ p > i.material-icons.float-left {
 .mdc-dialog--scrollable .mdc-dialog__content {
   padding-top: 0;
   padding-bottom: 20px;
+}
+
+.mdc-dialog__surface {
+  overflow: visible;
+
+  .mdc-dialog__actions {
+    padding: var(--space-5);
+    padding-top: 0;
+  }
+
+  .mdc-dialog__content {
+    overflow: visible;
+    line-height: inherit;
+  }
+
+  .mdc-select__menu {
+    position: absolute;
+  }
+}
+
+.mdc-dialog .mdc-dialog__title {
+  font-size: var(--fontSizes-xl);
+  line-height: var(--lineHeights-xl);
+  border-bottom: none;
+}
+
+.mdc-dialog .mdc-dialog__content {
+  color: var(--colors-gray800);
+  letter-spacing: normal;
+}
+
+.mdc-dialog .mdc-dialog__surface {
+  border-radius: var(--radii-md);
+  box-shadow: var(--shadows-2xl);
+  max-width: var(--sizes-sm);
+}
+
+.mdc-dialog {
+  .mdc-dialog__title,
+  .mdc-dialog__content,
+  .mdc-dialog__actions {
+    padding: 0 var(--space-4) var(--space-4);
+  }
+}
+
+.mdc-dialog .mdc-dialog__content {
+  padding-bottom: var(--space-5);
 }
 
 // rounded notched buttons
@@ -668,7 +822,7 @@ button.text-button {
 .bottom-buttons {
   background: #fff;
   width: 100%;
-  margin-left: -var(--space-5);
+  margin-left: calc(-1 * var(--space-5));
   padding-left: var(--space-5);
   padding-right: var(--space-5);
   box-sizing: content-box;
@@ -723,9 +877,11 @@ button.text-button {
     height: auto;
   }
 
-  form {
-    button {
-      margin-top: var(--space-5);
+  .configuration {
+    form {
+      button {
+        margin-top: var(--space-5);
+      }
     }
   }
 }
@@ -839,7 +995,7 @@ span.floating-button {
 
   .existing-pipeline-runs {
     .mdc-data-table {
-      $sizes: 10%, 60%, 30%;
+      $sizes: 10%, 30%, 30%, 30%;
 
       @for $i from 1 through length($sizes) {
         .mdc-data-table__header-cell:nth-child(#{$i}) {
@@ -915,6 +1071,11 @@ span.floating-button {
   a {
     color: inherit;
   }
+}
+
+b,
+strong {
+  font-weight: 500;
 }
 
 .parameter-tree {
@@ -999,15 +1160,6 @@ span.floating-button {
     position: absolute;
     left: 0;
     top: 100%;
-  }
-}
-
-.pipeline-settings {
-  .columns {
-    .column:nth-child(1) {
-      width: 30%;
-    }
-    margin-bottom: var(--space-5);
   }
 }
 
@@ -1115,15 +1267,82 @@ span.code {
     z-index: 9;
     padding: var(--space-5);
 
+    .services-status {
+      position: absolute;
+      right: 0;
+      padding: var(--space-5);
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 3px 4px 2px rgb(0 0 0 / 10%);
+      margin: 0 var(--space-5);
+
+      h3 {
+        font-weight: 500;
+        margin-bottom: calc(var(--space-5) / 2);
+      }
+
+      h4 {
+        margin-top: calc(var(--space-5) / 2);
+        &:first-of-type {
+          margin-top: 0;
+        }
+      }
+
+      .link-holder {
+        i {
+          display: block;
+          margin-top: calc(var(--space-5) / 2);
+        }
+      }
+
+      .edit-button-holder {
+        border-top: 1px solid $borderColor;
+        padding-top: calc(var(--space-5) / 2);
+        margin-top: calc(var(--space-5) / 2);
+        text-align: right;
+
+        button {
+          margin-bottom: 0;
+        }
+      }
+
+      div.link-holder {
+        margin-top: calc(var(--space-5) / 2);
+        overflow: auto;
+
+        a {
+          color: #000;
+          text-decoration: none;
+
+          span.material-icons {
+            font-size: 22px;
+            float: left;
+            padding-right: 8px;
+            margin-top: -2px;
+          }
+        }
+      }
+    }
+
+    button {
+      min-width: 0;
+    }
+
+    &,
+    .selection-buttons {
+      button {
+        min-width: 0;
+        & + button {
+          margin-left: var(--space-5);
+        }
+      }
+    }
+
     &.bottom-right {
       top: auto;
       bottom: 0;
       right: 0;
       left: auto;
-
-      button {
-        margin: 0;
-      }
     }
 
     &.top-left {
@@ -1133,6 +1352,12 @@ span.code {
       right: auto;
     }
 
+    &.top-right {
+      button {
+        margin-bottom: var(--space-5);
+      }
+    }
+
     &.bottom-left {
       top: auto;
       bottom: 0;
@@ -1140,7 +1365,6 @@ span.code {
       left: 0;
 
       button {
-        margin-bottom: 0;
         margin-top: var(--space-5);
       }
 
@@ -1152,16 +1376,6 @@ span.code {
         display: inline-block;
         padding-left: var(--space-5);
       }
-    }
-
-    button {
-      &:last-of-type {
-        margin-right: 0;
-      }
-
-      margin-right: var(--space-5);
-      margin-bottom: var(--space-5);
-      min-width: 0;
     }
   }
 
@@ -1544,28 +1758,6 @@ table {
   .mdc-data-table__header-cell.mdc-data-table__header-cell--checkbox,
   .mdc-data-table__cell.mdc-data-table__cell--checkbox {
     width: 56px;
-  }
-}
-
-.mdc-dialog {
-  z-index: 99;
-}
-
-.mdc-dialog__surface {
-  overflow: visible;
-
-  .mdc-dialog__actions {
-    padding: var(--space-5);
-    padding-top: 0;
-  }
-
-  .mdc-dialog__content {
-    overflow: visible;
-    line-height: inherit;
-  }
-
-  .mdc-select__menu {
-    position: absolute;
   }
 }
 

@@ -87,7 +87,7 @@ class PipelineStep:
 
 
 class Pipeline:
-    def __init__(self, steps: List[PipelineStep], properties: Dict[str, str]) -> None:
+    def __init__(self, steps: List[PipelineStep], properties: Dict[str, Any]) -> None:
         self.steps = steps
         self.properties = properties
 
@@ -120,6 +120,7 @@ class Pipeline:
             "uuid": description["uuid"],
             "settings": description.get("settings"),
             "parameters": description.get("parameters", {}),
+            "services": description.get("services", []),
         }
         return cls(list(steps.values()), properties)
 
@@ -144,7 +145,7 @@ class Pipeline:
                 return step
 
         raise error.StepUUIDResolveError(
-            "Step does not exist in the pipeline with UUID: {uuid}."
+            f"Step does not exist in the pipeline with UUID: {uuid}."
         )
 
     def get_params(self) -> Dict[str, Any]:

@@ -82,6 +82,7 @@ export const stitches = createCss({
       skeleton: colors.gray300,
     },
     space: {
+      0: 0,
       1: "0.25rem",
       2: "0.5rem",
       3: "0.75rem",
@@ -100,6 +101,7 @@ export const stitches = createCss({
       "2xs": "16rem",
       xs: "20rem",
       sm: "24rem",
+      md: "28rem",
       "3xl": "48rem",
       "4xl": "56rem",
     },
@@ -109,7 +111,7 @@ export const stitches = createCss({
     },
     fontWeights: {
       normal: 400,
-      bold: 600,
+      bold: 500,
     },
     fontSizes: {
       base: "1rem",
@@ -135,7 +137,11 @@ export const stitches = createCss({
     },
     radii: {
       sm: "0.25rem",
+      md: "0.375rem",
       rounded: "9999px",
+    },
+    shadows: {
+      "2xl": "0 25px 50px -12px rgba(0,0,0,0.25)",
     },
   },
   media: {

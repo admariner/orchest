@@ -224,7 +224,7 @@ def celery_debug_dump(
     if ext:
         # Add log files to the files to copy.
         for worker in [
-            "celery_env_builds",
+            "celery_builds",
             "celery_interactive",
             "celery_jobs",
         ]:
@@ -288,6 +288,7 @@ def containers_logs_dump(
         "orchest/jupyter-server:latest",
         "orchest/jupyter-enterprise-gateway",
         "orchest/memory-server:latest",
+        "orchest/session-sidecar:latest",
     }
 
     # Only log these containers if in ext mode, since they coud log user

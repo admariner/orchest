@@ -7,6 +7,7 @@ _minimal_orchest_images = [
     "orchest/jupyter-enterprise-gateway:latest",
     "orchest/jupyter-server:latest",
     "orchest/memory-server:latest",
+    "orchest/session-sidecar:latest",
     "orchest/update-server:latest",
     "orchest/orchest-api:latest",
     "orchest/orchest-webserver:latest",
@@ -60,3 +61,9 @@ ORCHEST_IMAGES = {
 }
 
 WRAP_LINES = 72
+
+ORCHEST_WEBSERVER_ADDRESS = "http://orchest-webserver:80"
+
+# CLI
+INTERNAL_ERR_MESSAGE = "It seems like Orchest experienced an internal server error."
+ALLOWED_BUILD_FAILURES = 5
